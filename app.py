@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
-from pandasai import Agent # Naya aur fast tareeka
+from pandasai.llm import GoogleGemini
+from pandasai import Agent # Ye line bhi check kar lena upar hai ya nahi
 
 st.set_page_config(page_title="Data Guru", layout="wide")
 st.header("Satik AI Data Analyst 🤖")
@@ -9,12 +10,12 @@ file = st.file_uploader("CSV upload karo", type=['csv'])
 
 if file:
     df = pd.read_csv(file)
-    st.dataframe(df.head(5)) # Data dikhayega
+    st.dataframe(df.head(5)) 
 
-    # Agent setup (Isme LLM ka dimaag hota hai)
-    # Hint: Free API ke liye Google 'Gemini API Key' le lo, 
-    # wo abhi kaafi free quota de rahe hain.
-    agent = Agent(df) 
+    # --- YE HAI BADLAV ---
+    llm = GoogleGemini(api_token="AIzaSyA24Xkz0H9z71X_7KDOfcsMCWnXpZrv80I") 
+    agent = Agent(df, config={"llm": llm}) 
+    # ---------------------
 
     query = st.text_input("Data ke baare mein kuch bhi pucho:")
     if query:
