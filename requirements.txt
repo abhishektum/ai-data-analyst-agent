@@ -1,3 +1,4 @@
 streamlit
 pandas
 pandasai
+pydantic==1.10.11
